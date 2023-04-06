@@ -1,0 +1,7 @@
+echo "# BIO496---Biopython-Homeworks" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/tugberkute/BIO496---Biopython-Homeworks.git
+git push -u origin main
