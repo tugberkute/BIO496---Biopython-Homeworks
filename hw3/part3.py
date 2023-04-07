@@ -9,4 +9,4 @@ def base_frequency_calculator(dna_sequence: str):
             base_dictionary[base] = dna_sequence.count(base)
     return base_dictionary
 
-print(base_frequency_calculator(input()))
+print(base_frequency_calculator(input("Please give a valid DNA sequence: ")))
