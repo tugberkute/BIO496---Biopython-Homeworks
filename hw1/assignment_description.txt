@@ -1,0 +1,63 @@
+Part 1 (0.25 pts)
+	After you passed Bio496, you are hired by Google Inc. They asked you who are other rival email suppliers against Gmail. 
+	You are going to write a script that:
+		1. takes an email address from the user, keep it simple for now (ex. efeelbeyli@gmail.com) (use input function),
+		2. iterates through the text (use for loop),
+		3. records the position of sign @ into a variable called location_one (use conditionals and comparison operators, if/elif/else)
+		4. records the position of sign . into a variable called location_two (use conditionals and comparison operators, if/elif/else)
+		5. by using string manipulations, detect the email provider from the input email and assign it into a variable called company_name, it should be the word between @ and . signs.
+		6. print a message that says "Your email provider is company_name" (company_name should be changeable).
+
+	Hints:
+	Define a count, increase it in every interation. Record that number when you find @ or .
+
+Part 2 (0.25 pts)
+	The faulty code scrambled the lines of the book called "The Tale of Words and Numbers". They lost the original
+	manuscript and all of the lines of the text is stored in a computer as python lists. Lines look like this:
+
+	scrambled_list = ["petunia", ["whale", ["1", "s,"]], "ArthurBowlDentSperm", [9, ["20", 0, "5,",["of"]]]]
+
+	while it should read: "Bowl of petunias, 91 Sperm whale 2005, Arthur Dent"
+
+	Write a script that will print the above sentence using the scrambled_list. You cannot directly print the
+	sentence as your script will be tested with other lists, mixed with the exact same order. Please use list manipulations.
+
+	Hints:
+	print() can print multiple things when you seperate them with comma, but it adds space for every item.
+	Remember that you can add strings with plus sign while you printing them in order to get rid of space character.
+
+Part 3 (0.5 pts)
+	We are trying to find the longest word in a given sentence.
+	You are NOT ALLOWED to use the built-in split() method in python. Instead, we are going to write it on our own.
+	The split() method is a built-in python method which splits a string into a list. You can specify the separator, default separator is any whitespace.
+	Please run the following lines in order to see how it works.
+
+
+	txt = "My name is Seren Serengil"
+	splitted_text_1 = txt.split() # gives you ["My", "name", "is", "Seren", "Serengil"] -> "The longest word is "Serengil", with the length of 8 letters."
+	splitted_text_2 = txt.split("Seren") # gives you ["My name is ", " ", "gil"]
+
+	In this part, we are trying to split the text from whitespaces and record the words into a list.
+	You are going to write a script that:
+		1. takes a sentence from the user, the sentence should contain minimum three words (use input function),
+		2. iterates through the text (use for loop),
+		3. records the location of every whitespace (use conditionals and comparison operators),
+		4. create a list-variable called splitted_text, append this list with every word you detected (use for loop and string manipulations),
+	
+	You will need to record the positions of every whitespaces (use a list)
+	Please finalize your code that can work with any sentence.
+	
+	Next;
+	You are going to use splitted_text list that you have created before.
+	In this part, you are going to write a script that:
+		1. Iterates through your list (use for loop),
+		2. Checks the length of evey item in your list (use built-in len() function),
+		3. Detects the position of the longest word,
+		4. Assign the longest word in the list into the variable called longest_word,
+		5. Assign the length of the longest word in the list into the variable called length_word,
+		5. Print the message that says "The longest word is "longest_word", with the length of length_word letters." (longest_word and length_word should be changeable).
+	You need to use character exceptions in order to write your longest word in between double quotes in the sentence with double quotes.
+	
+	Hints:
+	You can count the position of your longest word in your list as it mentioned before.
+	You can record the length of previous word and compare it with the length of next word during the for loop.
