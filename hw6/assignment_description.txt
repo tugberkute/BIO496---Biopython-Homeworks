@@ -1,0 +1,58 @@
+--- PART I ---
+
+You HAVE TO use regular expression package (use that command: import re)
+You have given a file named "prom_seqs.txt" which contains the transcript names and the promoter sequences belong. 
+Below, you have a list containing the motifs of DNA binding sites for several transcription factors. 
+
+mtfs = {"BCL6": "[TA].CTTTC.AGG[AG]AT", "SP1": "[GT]GGGCGG[GA][GA][CT]", "AP1": "TGA[GC]TCA", "NF-I": "TTGGC.{5}GCCAA"}
+
+Your mission, should you choose to accept it, is finding the transcripts containing any of those motifs and generating a file 
+for the output.
+
+Your output file should be tab-separated lines with 1- Transcription factor Name (TF_name)
+													2- TranscriptID 
+													3- number of recognition sites
+													4- sequence of the first recognition site
+													5- start position of the first recognition site
+													6- end position of the first recognition site
+
+Please name your output file as Hw5_yourNameSurname_output.txt
+
+Sample first two lines of your output file: 
+TF_name	TranscriptID	#recog_sites	seq_recog_site	start	end
+AP1    ENST00000374379    2    TGACTCA    2125    2132
+
+
+--- PART II ---
+
+Using the genelist and lengthlist below, create a dictionary with the following format:
+genelist = ['GPR139 ', 'YAP1', 'RASGEF1B', 'PAH', 'PLCB2', 'GAPDH', 'SST']
+lengthlist = [1613, 2393, 2277, 4122, 4616, 1875, 618]
+
+mydict = {'GPR139' : 1613, 'YAP1' : 2393, 'RASGEF1B' : 2277, 'PAH' : 4122, 'PLCB2' : 4616, 'GAPDH' : 1875, 'SST' : 618}
+
+Ask the user to give an integer. Loop through the dictionary and find the genes whose length is greater than the input.
+Print their names and their total length on the screen.
+
+Your script should loop until the user types exit as input.
+
+Sample output:
+
+Please give a number (type 'exit' to exit):4000
+
+Genes whose length is greater than 4000 are:
+PAH
+PLCB2
+Sum of their lengths:
+8738
+
+Please give a number (type 'exit' to exit):2300
+
+Genes whose length is greater than 2300 are:
+PAH
+PLCB2
+YAP1
+Sum of their lengths:
+11131
+
+Please give a number (type 'exit' to exit):exit
