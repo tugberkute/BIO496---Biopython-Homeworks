@@ -1,0 +1,78 @@
+"""
+Please follow all steps one by one.
+- Write a transcript class named as "Transcript()" and create following attributes and methods.
+
+- Attributes you need to create (Use the EXACT same names below as your attributes):
+	1) transcriptID : Name of your transcript                      -> self.transcriptID
+	2) chrNumber    : Chromosome number of your transcript         -> self.chrNumber
+	3) exonNumber   : Number of exons in your transcript           -> self.exonNumber
+	4) strand       : Strand of your transcript                    -> self.strand
+	5) geneName     : The name of the gene your transcript belongs -> self.geneName
+
+Hint: Please remember that those attributes should be defined on the __init__ constructor.  
+
+- Methods you need to write:
+
+	1) exonPairsCreator(): A method that returns a nested list of exon start-end TUPLE pairs of a transcript(i.e.: [(111,222), (333,444), (555,666), ...])
+	Steps : * Go up to your __init__ method. 
+			* Add two more attributes to your object self.exonStarts and self.exonEnds.
+			* Call those attributes in this method in order to create the exon pairs. 
+			* Add the list of pairs as an attribute of this object as self.exonPairs
+			* Do not forget to run this method before printing exon pairs from the object.
+	
+	2) txLength(): A method that returns the sum of all exon lengths of that transcript.  
+	Steps: * Use your self.exonPairs attribute.
+		   * Loop through the list of tuples and calculate the total length. 
+		   * Return the value of that length.
+		   * Do not forget to run the previous method before this method otherwise you can not use the exonPairs attribute.
+	
+	3) txList(): A method that returns the list of names of other transcripts under the same gene of your transcript.
+		
+		Steps: * Create a class variable named gene_dict, which will be an empty dictionary. (Go upper than your init method)
+			   It will be structured as the keys of gene names and values of a dictionary which will have the keys of transcript ID and values CLASS OBJECT. 
+			   (ex: gene_dict = {"geneName1" : [ENST1, ENST2, ...], "geneName2": [ENST3, ENST4, ...], ...})
+			   * Every time we create a class instance/object, we want that dictionary to be updated. So, we have to write a couple of lines of code inside of our
+			   __init__ method that adds a gene name as a key (if it is the first time), or appends the transcript object to the value of that key which was 
+			   already created as a list type.
+			   * Now, this method will use the gene_dict dictionary (which was a class variable -> Transcript.gene_dict) and returns the list of names of transcript ids. 
+			   Remember that you will call this method from your object. To be able to list the names of transcripts, your method should find out the gene name
+			   of your object, use that gene as a key value, then look for the values belonging to that key, and collects the transcriptIDs inside of that list.
+
+- Outside of the class:
+
+1) Write a funciton called objectCreator():
+   Steps: * This function will take the file path as an argument.
+		  * Opens file and loop through lines.
+		  * Create objects and stores them in a dictionary. 
+		  which will have keys of transcriptID and values of objects.
+		  * Returns to the dictionary.
+
+2) Write a function called outputCreator():
+   Steps: * This function will take the transcriptID as an argument.
+		  * Opens an output file with a name as transcriptID_summary.txt where the transcripID is coming from argument.
+		  * Print out the information specific to that transcript. Please follow the exact same pattern as 
+		  I sent to you at the end of this file.
+		  * You will use the dictionary created from objectCreator to take the information. You will not parse the file again !!!
+
+2) Write a main() function as we did on examples:
+   Steps: * Take user input for the file path from user.
+		  * Run the objectCreator and collect all the objects into the variable called "collection".
+		  * Take user input for the transcript ID from user.
+		  * Check that transcripID is in your collection. If not, ask until the user gives a valid ID (you will use while).
+		  Allow user to quit if "exit" is typed.
+		  * Ask user if they want to print the output information to the file or to the terminal.
+		  * Quit.
+
+Please remember that you have to run some of your methods before you call some of the attributes.
+
+Sample Output File Format (please arrange the spaces as I did here. Hint: You can use f-string with "colon and number" combination):
+
+Input File            : ensembl_hg19.txt
+Transcript ID         : ENST00000468286
+Chromosome Number     : chr1
+Exon Number           : 10
+Transcript Length     : 856
+Gene Name             : ENSG00000118473
+Cousin Transcript IDs : ENST00000237247, ENST00000371039, ENST00000424320, ENST00000371035, ENST00000468286, ENST00000371036, ENST00000371037, ENST00000483060
+
+"""
