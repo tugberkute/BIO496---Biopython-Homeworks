@@ -1,0 +1,75 @@
+Please use your previous Transcript() class and continue with the following steps:
+
+- The method you need to write:
+
+1 ) promoterSequenceFetcher(): This will be a method for your class to fetch promoter sequence of your object transcript as a class instance. For this homework,
+							   we define the promoter sequence as the sequence starting from 5000 base UPSTREAM of your transcript's 5 prime end. In that case,
+							   it is important for you to consider the strand information of your transcript.
+
+    You are going to use the api of togows.org. The example query link is following: http://togows.org/api/ucsc/hg19/chr1:54710-54726
+    One of your task is finding out the way to get the information from web using python libraries. (ex. urllib, requests etc.)
+
+    Steps that your method need to follow:
+    1- Check the strand info.
+    2- Find out the 5 prime position.
+    3- Find out the 5000 base upstream position.
+    4- Check the chr number info.
+    5- Create togows query link.
+    6- Fetch the sequence from web.
+    7- Create the ATTRIBUTE called promoterSeq and add the sequence into the self. (Remember you could create attributes into methods)
+
+    One thing you need to remember is that TOGOWS retrieve the sequence without checking its strand information, in other words,
+    it always uses the positive strand. What you need to do for the transcripts on the negative strand is taking reverse-complement
+    of the sequence coming from TOGOWS. You can use your old code for that.
+
+2 ) codingSequenceFetcher(): This will be a method for your class to fetch CDS of your object transcript. In this case, you have to fetch the partial sequences from
+							 TOGOWS and merge them to create complete CDS sequence. From your previous codes, you can use your UTR finder codes for 5 prime and
+							3 prime ends.
+
+	Steps that your method need to follow:
+    1- Check the strand info.
+    2- Find out the 5 prime UTR and 3 prime UTR positions.
+    3- Exclude the UTRs from exons and detect the exact position number.  and fetch the all other exons from togows.
+    4- Create togows query link.
+    5- Fetch the sequence from web.
+	6- Repeat 4 and 5 for every other exon starts and exon ends in between UTRs.
+    6- Merge the sequences coming from fetcher.
+    7- Create the ATTRIBUTE called CodingSeq and add the sequence into the self. (Remember you could create attributes into methods)
+
+3 ) proteinSequence(): This will be a method for your class to return protein sequence of your object transcript. In that case you will use the attribute you
+					   created in previous part. You can use the dictionary below to convert your CDS into amino acid sequence. Create the ATTRIBUTE called
+					   ProteinSeq and add the sequence into the self. (Remember you could create attributes into methods)
+
+4 ) We will use parameters when we call your script.
+	Parameters:
+	* "-id transID" Parameter will be a must. By giving a transcript id, all other functions will be run on that transcript.
+	* "-promoter tfName"  Parameter, if it is called, your script will fetch the promoter sequence and search for the transcription factor binding site query using regex.
+	Use the mtfs dictionary given below. The user input must only be the 4 motifs in that dictionary. Printing True or False is enough.
+	* "-protein" Parameter, if it is given by the user, the script will print the protein sequence.
+
+###### You can use the following codes in your homework ######
+
+aa_code = {"TTT": "F", "TTC": "F", "TTA": "L", "TTG": "L",
+		"TCT": "S", "TCC": "S", "TCA": "S", "TCG": "S",
+		"TAT": "Y", "TAC": "Y", "TAA": "_", "TAG": "_",
+		"TGT": "C", "TGC": "C", "TGA": "_", "TGG": "W",
+		"CTT": "L", "CTC": "L", "CTA": "L", "CTG": "L",
+		"CCT": "P", "CCC": "P", "CCA": "P", "CCG": "P",
+		"CAT": "H", "CAC": "H", "CAA": "Q", "CAG": "Q",
+		"CGT": "R", "CGC": "R", "CGA": "R", "CGG": "R",
+		"ATT": "I", "ATC": "I", "ATA": "I", "ATG": "M",
+		"ACT": "T", "ACC": "T", "ACA": "T", "ACG": "T",
+		"AAT": "N", "AAC": "N", "AAA": "K", "AAG": "K",
+		"AGT": "S", "AGC": "S", "AGA": "R", "AGG": "R",
+		"GTT": "V", "GTC": "V", "GTA": "V", "GTG": "V",
+		"GCT": "A", "GCC": "A", "GCA": "A", "GCG": "A",
+		"GAT": "D", "GAC": "D", "GAA": "E", "GAG": "E",
+		"GGT": "G", "GGC": "G", "GGA": "G", "GGG": "G"}
+
+def get_dna_seq(chrom, start, end):
+	mystr = 'http://togows.org/api/ucsc/hg19/{}:{}-{}'.format(chrom, start, end)
+	with urllib.request.urlopen(mystr) as response:
+		html = response.read().decode("utf-8")
+	return str(html)
+
+mtfs = {"BCL6": "[TA].CTTTC.AGG[AG]AT", "SP1": "[GT]GGGCGG[GA][GA][CT]", "AP1": "TGA[GC]TCA", "NF-I": "TTGGC.{5}GCCAA"}
