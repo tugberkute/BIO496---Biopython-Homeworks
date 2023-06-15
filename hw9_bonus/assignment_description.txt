@@ -1,0 +1,59 @@
+"""
+In this assignment you will extract information from a Protein Data Bank entry (1ubq.pdb), which contains the atom coordinates for the protein Ubiquitin.
+For more information on this protein see http://www.rcsb.org/pdb/explore.do?structureId=1UBQ. 
+
+There is a lot of information in this file, put the part you will need are the lines starting with the keyword "ATOM". 
+There are 12 columns contain the following information in these lines: "ATOM", atom number, atom name, residue name,chain, residue id, x, y, z, occupancy, b-factor, element symbol.
+
+A protein is composed of residues. For 1UBQ there are 76 residues. Residues are composed of atoms. Each residue has a different number and composition of atoms.
+
+1- Create a function pdbread, which receives the file name as an argument. In this case you can use 1ubq.pdb file that I uploaded to the drive.
+This function should open the file, read its contents and extract the protein, residue, and atom information from this file and creates proper objects as I described below.
+
+!!!! PLEASE USE THE CODE STRUCTURE EXACTLY AS I CONSTRUCTED. CHECK THE SAMPLE CODES AND OUTCOMES AT THE END !!!
+
+2- Create three separate classes: atom, residue, protein.
+	a- Protein() class should contain the following attributes:
+		1- proteinName: There are lines starting with "COMPND" at the beginning of the file. Read the second COMPND line and take all the words after "Molecule:" keyword. 
+		There can be more than one word.
+		2- listOfResidues: A dictionary of residues it is composed of. This dictionary should contain the residue number as keys and the Residue() class instance as values.
+		
+	b- Residue() class should contain the following attributes:
+		1- residue_name: column 4
+		2- residue_number: column 6
+		3- listOfAtoms: A dictionary of atoms it is composed of. This dictionary should contain the atom number as keys and the Atom() class instance as values.
+		
+	c- Atom() class should contain the following attributes:
+		1- atom_name: Look at the example line at the bottom, third column. 
+		2- element_type: Look at the example line at the bottom, N for nitrogen
+		3- atom_number: Look at the example line at the bottom, the number on the second column.
+		4- xyz_crd: list of numbers of xyz coordinates; 7th,8th,9th numbers.
+
+NOTE: The function should be general purpose. It should work for any arbitrary PDB file. So you have to determine the number of residues and atom from the PDB file automatically.
+ATOM      1  N   MET A   1      27.340  24.430   2.614  1.00  9.67           N  
+ATOM      2  CA  MET A   1      26.266  25.413   2.842  1.00 10.38           C  
+ATOM      3  C   MET A   1      26.913  26.639   3.531  1.00  9.62           C  
+ATOM      4  O   MET A   1      27.886  26.463   4.263  1.00  9.62           O  
+ATOM      5  CB  MET A   1      25.112  24.880   3.649  1.00 13.77           C  
+ATOM      6  CG  MET A   1      25.353  24.860   5.134  1.00 16.29           C  
+ATOM      7  SD  MET A   1      23.930  23.959   5.904  1.00 17.17           S  
+ATOM      8  CE  MET A   1      24.447  23.984   7.620  1.00 16.11           C  
+ATOM      9  N   GLN A   2      26.335  27.770   3.258  1.00  9.27           N  
+ATOM     10  CA  GLN A   2      26.850  29.021   3.898  1.00  9.07           C  
+ATOM     11  C   GLN A   2      26.100  29.253   5.202  1.00  8.72           C  
+ATOM     12  O   GLN A   2      24.865  29.024   5.330  1.00  8.22           O  
+ATOM     13  CB  GLN A   2      26.733  30.148   2.905  1.00 14.46           C  
+ATOM     14  CG  GLN A   2      26.882  31.546   3.409  1.00 17.01           C  
+ATOM     15  CD  GLN A   2      26.786  32.562   2.270  1.00 20.10           C  
+ATOM     16  OE1 GLN A   2      27.783  33.160   1.870  1.00 21.89           O  
+ATOM     17  NE2 GLN A   2      25.562  32.733   1.806  1.00 19.49           N  
+
+
+Example Outcomes:
+my_protein = pdbread("1ubx.pdb")
+print(my_protein.proteinName) -> UBIQUITIN
+print(list(my_protein.listOfResidues.keys()))) -> ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76']
+print(my_protein.listOfResidues["2"].residue_name) -> GLN
+print(list(my_protein.listOfResidues["2"].listOfAtoms.keys())) -> ['10', '11', '12', '13', '14', '15', '16', '17']
+print(my_protein.listOfResidues["2"].listOfAtoms["12"].xyz_crd) -> [24.865, 29.024, 5.33]
+"""
